@@ -44,7 +44,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   touch-action: manipulation;
   overscroll-behavior: none;
-  /* iOS full height */
   min-height: -webkit-fill-available;
   min-height: 100dvh;
 }
@@ -53,14 +52,12 @@ body {
   body { cursor: auto; touch-action: manipulation; }
 }
 
-/* ── CANVAS LAYERS ── */
 #bg-canvas {
   position: fixed; inset: 0;
   pointer-events: none; z-index: 0;
   will-change: transform;
 }
 
-/* ── CUSTOM CURSOR (desktop only) ── */
 .cursor {
   position: fixed; width: 10px; height: 10px;
   background: var(--gold); border-radius: 50%;
@@ -79,7 +76,6 @@ body {
 }
 @media (pointer:coarse) { .cursor, .cursor-ring { display: none !important; } }
 
-/* ── FLASH OVERLAY ── */
 #flash {
   position: fixed; inset: 0; z-index: 500;
   background: var(--bg);
@@ -87,8 +83,6 @@ body {
   transition: opacity 0.55s ease;
 }
 #flash.in  { opacity: 1; pointer-events: all; }
-
-/* ── TUNNEL ── */
 #tunnel-canvas {
   position: fixed; inset: 0; z-index: 200;
   pointer-events: none; opacity: 0;
@@ -97,12 +91,10 @@ body {
 }
 #tunnel-canvas.active { opacity: 1; }
 
-/* ── SCENES ── */
 .scene {
   position: fixed; inset: 0; z-index: 10;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  /* safe area padding */
   padding: calc(var(--safe-top) + 40px) 28px calc(var(--safe-bot) + 40px);
   opacity: 0; pointer-events: none;
   transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1),
@@ -127,7 +119,6 @@ body {
               transform 0.5s cubic-bezier(0.16,1,0.3,1);
 }
 
-/* ── PROGRESS DOTS ── */
 #progress {
   position: fixed; right: 20px; top: 50%;
   translate: 0 -50%; z-index: 100;
@@ -142,7 +133,6 @@ body {
 .dot.active { background: var(--gold); scale: 1.6; box-shadow: 0 0 10px var(--glow); }
 .dot.done   { background: rgba(245,200,66,0.45); }
 
-/* ── AMBIENT ORBS ── */
 .orb {
   position: fixed; border-radius: 50%;
   pointer-events: none; z-index: 1;
@@ -155,7 +145,6 @@ body {
   to   { transform: translate(var(--tx),var(--ty)); }
 }
 
-/* ── FLOATING PETALS ── */
 .petal {
   position: fixed; pointer-events: none; z-index: 2;
   opacity: 0; animation: floatUp var(--d) ease var(--dl) infinite;
@@ -168,9 +157,6 @@ body {
   100% { transform: translateY(-10vh) rotate(340deg) scale(0.25); opacity: 0; }
 }
 
-/* ════════════════════════════════
-   SCENE 0 — INTRO
-════════════════════════════════ */
 #s0 .label {
   font-family: 'Lato', sans-serif; font-weight: 100;
   font-size: clamp(10px, 2.2vw, 16px);
@@ -224,9 +210,6 @@ body {
   50%      { transform: translateY(7px); }
 }
 
-/* ════════════════════════════════
-   SCENE 1 — WHY
-════════════════════════════════ */
 #s1 { overflow: hidden; }
 #s1 .title {
   font-family: 'Cormorant Garamond', serif;
@@ -309,7 +292,6 @@ body {
 }
 @keyframes cardRipple { to { transform: scale(5); opacity: 0; } }
 
-/* ── NEXT BUTTON ── */
 .next-btn {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 300; font-style: italic;
@@ -341,9 +323,6 @@ body {
 }
 .next-btn:active { transform: scale(0.97); }
 
-/* ════════════════════════════════
-   SCENE 2 — HEART / CONFESSION
-════════════════════════════════ */
 #s2 { gap: 0; }
 #heart-canvas {
   position: absolute; inset: 0;
@@ -382,9 +361,6 @@ body {
   margin-bottom: 32px;
 }
 
-/* ════════════════════════════════
-   SCENE 3 — QUESTION
-════════════════════════════════ */
 #s3 .q-text {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 300; font-style: italic;
@@ -438,9 +414,6 @@ body {
   background: rgba(245,200,66,0.05);
 }
 
-/* ════════════════════════════════
-   SCENE 4 — FINALE
-════════════════════════════════ */
 #s4 .finale-text {
   font-family: 'Sacramento', cursive;
   font-size: clamp(42px, 10vw, 100px);
@@ -469,13 +442,11 @@ body {
 #s4 .replay-btn:hover,
 #s4 .replay-btn:active { color: rgba(245,240,232,0.42); }
 
-/* ── CONFETTI CANVAS ── */
 #conf-canvas {
   position: fixed; inset: 0; z-index: 300;
   pointer-events: none;
 }
 
-/* ── MOBILE SPECIFIC OVERRIDES ── */
 @media (max-width: 480px) {
   .scene { padding: calc(var(--safe-top) + 32px) 20px calc(var(--safe-bot) + 32px); }
   #s1 .title { margin-bottom: 22px; }
@@ -485,7 +456,6 @@ body {
   #s4 .finale-text { font-size: clamp(38px, 12vw, 72px); }
 }
 
-/* ── LANDSCAPE MOBILE ── */
 @media (max-height: 500px) and (orientation: landscape) {
   .scene { justify-content: flex-start; padding-top: calc(var(--safe-top) + 16px); }
   #s0 .name { font-size: clamp(48px, 12vw, 88px); }
@@ -512,14 +482,12 @@ body {
 
 <div id="flash"></div>
 
-<!-- Ambient orbs -->
 <div class="orb" style="width:480px;height:480px;background:rgba(245,200,66,0.03);top:-90px;left:-130px;--d:10s;--dl:0s;--tx:75px;--ty:65px;"></div>
 <div class="orb" style="width:320px;height:320px;background:rgba(160,80,220,0.025);bottom:0;right:-90px;--d:13s;--dl:2.5s;--tx:-65px;--ty:-85px;"></div>
 <div class="orb" style="width:260px;height:260px;background:rgba(245,200,66,0.022);bottom:28%;left:8%;--d:11s;--dl:5.5s;--tx:55px;--ty:-55px;"></div>
 
 <div id="progress"></div>
 
-<!-- S0: INTRO -->
 <section class="scene active" id="s0">
   <div class="label"><span class="typewriter" id="tw"></span></div>
   <div class="name" id="name-el"></div>
@@ -528,14 +496,12 @@ body {
   </button>
 </section>
 
-<!-- S1: REASONS -->
 <section class="scene" id="s1">
   <div class="title" id="s1-title">за что я люблю тебя до боли</div>
   <div class="reasons-wrap" id="reasons-wrap"></div>
   <button class="next-btn" id="s1-next">хочу сказать ещё →</button>
 </section>
 
-<!-- S2: HEART / CONFESSION -->
 <section class="scene" id="s2">
   <div class="inner">
     <div class="confession" id="confession-el"></div>
@@ -545,7 +511,6 @@ body {
   </div>
 </section>
 
-<!-- S3: QUESTION -->
 <section class="scene" id="s3">
   <div class="q-text">Позволишь ли ты мне<br>быть рядом?</div>
   <div class="q-sub">выбери ответ</div>
@@ -556,14 +521,12 @@ body {
   </div>
 </section>
 
-<!-- S4: FINALE -->
 <section class="scene" id="s4">
   <div class="finale-text" id="finale-text"></div>
   <button class="replay-btn" id="replay-btn">↺ &nbsp; с начала</button>
 </section>
 
 <script>
-// ═══════════════ CONFIG ═══════════════
 const C = {
   name:       'Полина-Мария',
   intro:      'Есть кое-что важное...',
@@ -590,12 +553,10 @@ let current = 0;
 const isMobile = window.matchMedia('(pointer:coarse)').matches;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ═══════════════ INIT DOM ═══════════════
 document.getElementById('name-el').textContent = C.name;
 document.getElementById('confession-el').innerHTML = C.confession.replace(/\n/g,'<br>');
 document.getElementById('finale-text').textContent = C.finale;
 
-// ═══════════════ PROGRESS DOTS ═══════════════
 const progEl = document.getElementById('progress');
 SCENES.forEach((_,i) => {
   const d = document.createElement('div');
@@ -609,7 +570,6 @@ function updateDots() {
   });
 }
 
-// ═══════════════ TYPEWRITER ═══════════════
 function runTypewriter(text, el, speed=50) {
   return new Promise(res => {
     let i = 0;
@@ -621,7 +581,6 @@ function runTypewriter(text, el, speed=50) {
   });
 }
 
-// ═══════════════ CURSOR (desktop) ═══════════════
 const curEl  = document.getElementById('cursor');
 const ringEl = document.getElementById('cursor-ring');
 let cx=0, cy=0;
@@ -629,12 +588,10 @@ if (!isMobile) {
   document.addEventListener('mousemove', e => {
     cx=e.clientX; cy=e.clientY;
     curEl.style.left  = cx+'px'; curEl.style.top  = cy+'px';
-    // ring follows with slight delay
     requestAnimationFrame(()=>{
       ringEl.style.left = cx+'px'; ringEl.style.top = cy+'px';
     });
   },{passive:true});
-  // ring uses transition delay instead of setInterval
   ringEl.style.transitionProperty = 'left,top';
   ringEl.style.transitionDuration = '0.1s';
   ringEl.style.transitionTimingFunction = 'linear';
@@ -644,12 +601,10 @@ if (!isMobile) {
   });
 }
 
-// ═══════════════ STAR CANVAS ═══════════════
 const bgC = document.getElementById('bg-canvas');
 const bgX = bgC.getContext('2d');
 let stars=[], starT=0, gyroX=0, gyroY=0, lerpGX=0, lerpGY=0;
 let mouseSX=0, mouseSY=0, lerpMX=0, lerpMY=0;
-// Reduce star count on mobile for performance
 const STAR_COUNT = isMobile ? 140 : 220;
 
 if (!isMobile) {
@@ -721,7 +676,6 @@ function drawBG(timestamp) {
 }
 requestAnimationFrame(drawBG);
 
-// ═══════════════ TUNNEL TRANSITION ═══════════════
 const tunC = document.getElementById('tunnel-canvas');
 const tunX = tunC.getContext('2d');
 let tunRunning=false, tunT=0;
@@ -739,7 +693,6 @@ function drawTunnel(timestamp) {
   tunX.clearRect(0,0,tunC.width,tunC.height);
   const cx=tunC.width/2, cy=tunC.height/2;
   tunT += .055;
-  // rings
   for(let i=26; i>0; i--) {
     const r = (i/26)*(Math.max(tunC.width,tunC.height)*0.82) * (1-(tunT%1)*.045);
     const a = (i/26)*0.55*(1-(tunT%1)*.025);
@@ -747,7 +700,6 @@ function drawTunnel(timestamp) {
     tunX.strokeStyle = `rgba(245,200,66,${a*.38})`;
     tunX.lineWidth = 1+i*.08; tunX.stroke();
   }
-  // rays
   for(let k=0; k<6; k++) {
     const angle = (k/6)*Math.PI*2 + tunT*.45;
     const len = Math.max(tunC.width,tunC.height);
@@ -758,8 +710,6 @@ function drawTunnel(timestamp) {
   }
   requestAnimationFrame(drawTunnel);
 }
-
-// ═══════════════ HEART CANVAS ═══════════════
 const hrtC = document.getElementById('heart-canvas');
 const hrtX = hrtC.getContext('2d');
 let hparts=[], hphase=0, heartActive=false;
@@ -820,7 +770,6 @@ function drawHeartLoop(timestamp) {
     hrtX.strokeStyle=`rgba(245,200,66,${pulse})`;
     hrtX.lineWidth=1.5; hrtX.stroke();
   }
-  // cap particles for performance
   if(hparts.length > MAX_HPARTS) hparts.splice(0, hparts.length - MAX_HPARTS);
   hparts = hparts.filter(p => p.life>0);
   hparts.forEach(p => {
@@ -850,8 +799,6 @@ hrtC.addEventListener('touchstart', e => {
     heartTouchAt(e.touches[0].clientX, e.touches[0].clientY);
   }
 },{passive:false});
-
-// ═══════════════ CONFETTI ═══════════════
 const confC = document.getElementById('conf-canvas');
 const confX = confC.getContext('2d');
 let confPieces=[], confRunning=false;
@@ -891,8 +838,6 @@ function drawConf(timestamp) {
     confX.restore();
   });
 }
-
-// ═══════════════ SCENE TRANSITION ═══════════════
 let transitioning = false;
 
 function goTo(next, dir='up') {
@@ -935,8 +880,6 @@ function tunnelTransition(next) {
     goTo(next, 'up');
   }, 750);
 }
-
-// ═══════════════ SCENE ENTER LOGIC ═══════════════
 function onSceneEnter(idx) {
   if(idx===0) startS0();
   if(idx===1) startS1();
@@ -977,8 +920,6 @@ function startS4() {
     confX.clearRect(0,0,confC.width,confC.height);
   }, 6500);
 }
-
-// ═══════════════ REASONS GRID ═══════════════
 const wrap = document.getElementById('reasons-wrap');
 C.reasons.forEach(r => {
   const card = document.createElement('div');
@@ -996,8 +937,6 @@ C.reasons.forEach(r => {
     card.appendChild(rEl);
     rEl.addEventListener('animationend', () => rEl.remove(), {once:true});
   };
-
-  // Touch
   card.addEventListener('touchstart', e => {
     e.preventDefault();
     const t = e.touches[0];
@@ -1007,8 +946,6 @@ C.reasons.forEach(r => {
     if(navigator.vibrate) navigator.vibrate(12);
     setTimeout(() => card.classList.remove('tapped'), 900);
   },{passive:false});
-
-  // Mouse
   if (!isMobile) {
     card.addEventListener('click', e => addRipple(e.clientX, e.clientY));
     card.addEventListener('mouseenter', () => curEl.classList.add('big'));
@@ -1016,8 +953,6 @@ C.reasons.forEach(r => {
   }
   wrap.appendChild(card);
 });
-
-// ═══════════════ BUTTON WIRING ═══════════════
 document.getElementById('s0-next').addEventListener('click', () => tunnelTransition(1));
 document.getElementById('s0-next').addEventListener('touchstart', () => {
   if(navigator.vibrate) navigator.vibrate(10);
@@ -1044,8 +979,6 @@ document.getElementById('replay-btn').addEventListener('click', () => {
   document.getElementById('tw').textContent = '';
   tunnelTransition(0);
 });
-
-// ═══════════════ FLOATING PETALS ═══════════════
 const PETALS = ['✦','✿','❋','◈','✺','❈'];
 const PETAL_COUNT = isMobile ? 10 : 16;
 for(let i=0; i<PETAL_COUNT; i++) {
@@ -1059,8 +992,6 @@ for(let i=0; i<PETAL_COUNT; i++) {
   p.style.fontSize = (8+Math.random()*12)+'px';
   document.body.appendChild(p);
 }
-
-// ═══════════════ BOOT ═══════════════
 startS0();
 </script>
 </body>
